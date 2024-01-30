@@ -1,0 +1,5 @@
+storage="?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2024-01-30T10:44:12Z&st=2024-01-30T02:44:12Z&spr=https&sig=NWBzECLZPGeD2TypYOdjANqUCrl2UedDWQUHsourq0M%3D"
+
+container_name="https://mymlprojects.blob.core.windows.net/raw/"
+
+./azcopy sync "data"  "$container_name$storage"    --delete-destination=true --recursive=true --exclude-pattern=".DS_Store"
