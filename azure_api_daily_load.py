@@ -1,3 +1,4 @@
+#!/miniconda3/envs/ml-ai
 import requests
 import json
 from datetime import datetime
@@ -9,7 +10,7 @@ api_key = 'KO4Q75QIO0DULFR5'
 symbol = ['AAPL', 'MSFT', 'AMZN', 'TSLA'] 
 
 # folder to save data
-folder_path = 'data/'
+folder_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/data/'
 
 # today date
 today = datetime.now().date()
@@ -23,6 +24,7 @@ def load_data(api_key, symbol):
     # Build the API request URL
     url = f'{endpoint}?function={function}&symbol={symbol}&apikey={api_key}&datatype={datatype}&outputsize=full'
     # Make the API request
+    
     response = requests.get(url)
 
     # Check if the request was successful
@@ -51,7 +53,8 @@ def daily_process():
                 load_files_list.append(stock)
                 print(f"JSON data saved to {file_path}")
         
-        with open('output.txt', 'w') as file:
+        text_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/output.txt'
+        with open(text_path, 'w') as file:
             file.write(f'{len(load_files_list)}' + '\n')
             # Write the intro string
             file.write(f'The loaded stock files for {today} are :' + '\n')
@@ -62,8 +65,6 @@ def daily_process():
     
     except Exception as error:
         print(f'An unexpected error occurred: {error}')
-
-
-
+   
 # daily runing
 daily_process()
