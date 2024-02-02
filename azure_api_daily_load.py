@@ -44,7 +44,7 @@ def daily_process():
         load_files_list = []
         for stock in symbol:
             data = load_data(api_key, stock)
-            file_path = f'{folder_path}{stock.lower()}.json'
+            file_path = f'{folder_path}{stock}.json'
 
             if list(data.keys())[0] != 'Information':
                 with open(file_path, 'w') as json_file:
@@ -66,5 +66,6 @@ def daily_process():
     except Exception as error:
         print(f'An unexpected error occurred: {error}')
    
+
 # daily runing
 daily_process()

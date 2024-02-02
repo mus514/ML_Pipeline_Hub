@@ -1,5 +1,20 @@
-storage="?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2024-01-30T10:44:12Z&st=2024-01-30T02:44:12Z&spr=https&sig=NWBzECLZPGeD2TypYOdjANqUCrl2UedDWQUHsourq0M%3D"
+#!/bin/bash
 
+storage="?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2024-02-19T22:40:27Z&st=2024-02-01T14:40:27Z&spr=https&sig=PbOHAKAbxBdgR5Tw5g4pyWqBof3GolUQNoe%2BkAxDPPQ%3D"
 container_name="https://mymlprojects.blob.core.windows.net/raw/"
 
-./azcopy sync "data"  "$container_name$storage"    --delete-destination=true --recursive=true --exclude-pattern=".DS_Store"
+
+# the path for the daily output text file
+file_path="output.txt"
+
+# Read the first line of the file
+first_line=$(head -n 1 "$file_path")
+
+# Check if the first line contains the digit "4"
+if [[ "$first_line" == *4* ]]; then
+    echo "Executing the output because it contains a 4 in the first line."
+    ./azcopy sync "data"  "$container_name$storage"    --delete-destination=true --recursive=true --exclude-pattern=".DS_Store"
+
+else
+    echo "The first line does not contain a 4. Skipping execution."
+fi
