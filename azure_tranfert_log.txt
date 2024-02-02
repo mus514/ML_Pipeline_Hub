@@ -6,7 +6,10 @@ INFO: Any empty folders will not be processed, because source and/or destination
 Job acf780ca-1f92-f24b-6cc2-bfe1b1371e11 has started
 Log file is located at: /Users/mustapha/.azcopy/acf780ca-1f92-f24b-6cc2-bfe1b1371e11.log
 
-0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 3.12880.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 8.2366100.0 %, 4 Done, 0 Failed, 0 Pending, 4 Total, 2-sec Throughput (Mb/s): 0   
+
+0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 3.1288
+0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 8.2366
+100.0 %, 4 Done, 0 Failed, 0 Pending, 4 Total, 2-sec Throughput (Mb/s): 0   
 
 Job acf780ca-1f92-f24b-6cc2-bfe1b1371e11 Summary
 Files Scanned at Source: 5
