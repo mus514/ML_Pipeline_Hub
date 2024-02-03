@@ -1,27 +1,24 @@
 Executing the output because it contains a 4 in the first line.
-INFO: azcopy 10.22.2: A newer version 10.23.0 is available to download
-
 INFO: Any empty folders will not be processed, because source and/or destination doesn't have full folder support
 
-Job acf780ca-1f92-f24b-6cc2-bfe1b1371e11 has started
-Log file is located at: /Users/mustapha/.azcopy/acf780ca-1f92-f24b-6cc2-bfe1b1371e11.log
+Job 480daa44-4b03-2b42-6f84-5ce3b73d77f3 has started
+Log file is located at: /Users/mustapha/.azcopy/480daa44-4b03-2b42-6f84-5ce3b73d77f3.log
 
+INFO: azcopy 10.22.2: A newer version 10.23.0 is available to download
 
-0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 3.1288
-0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 8.2366
-100.0 %, 4 Done, 0 Failed, 0 Pending, 4 Total, 2-sec Throughput (Mb/s): 0   
+0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 3.25820.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 1.96430.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 2.35730.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 2.850944.0 %, 2 Done, 0 Failed, 2 Pending, 4 Total, 2-sec Throughput (Mb/s): 0.9379100.0 %, 4 Done, 0 Failed, 0 Pending, 4 Total, 2-sec Throughput (Mb/s): 0    
 
-Job acf780ca-1f92-f24b-6cc2-bfe1b1371e11 Summary
+Job 480daa44-4b03-2b42-6f84-5ce3b73d77f3 Summary
 Files Scanned at Source: 5
-Files Scanned at Destination: 0
-Elapsed Time (Minutes): 0.1002
+Files Scanned at Destination: 4
+Elapsed Time (Minutes): 0.2003
 Number of Copy Transfers for Files: 4
 Number of Copy Transfers for Folder Properties: 0 
 Total Number Of Copy Transfers: 4
 Number of Copy Transfers Completed: 4
 Number of Copy Transfers Failed: 0
 Number of Deletions at Destination: 0
-Total Number of Bytes Transferred: 2847495
-Total Number of Bytes Enumerated: 2847495
+Total Number of Bytes Transferred: 2848030
+Total Number of Bytes Enumerated: 2848030
 Final Job Status: Completed
 
