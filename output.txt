@@ -1,6 +1,6 @@
 4
-The loaded stock files for 2024-02-03 are :
+The loaded stock files for 2024-02-04 are :
 ----- AAPL
 ----- MSFT
 ----- AMZN
------ TSLA
+----- GOOGL
