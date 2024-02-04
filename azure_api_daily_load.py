@@ -7,7 +7,7 @@ from datetime import datetime
 api_key = 'KO4Q75QIO0DULFR5'
 
 # Specify the stock symbol and API endpoint for time series data
-symbol = ['AAPL', 'MSFT', 'AMZN', 'TSLA'] 
+symbol = ['AAPL', 'MSFT', 'AMZN', 'GOOGL'] 
 
 # folder to save data
 folder_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/data/'
