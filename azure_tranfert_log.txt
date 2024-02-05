@@ -1,0 +1,22 @@
+Executing the output because it contains a 4 in the first line.
+INFO: Any empty folders will not be processed, because source and/or destination doesn't have full folder support
+
+Job f20cd071-6abd-0b4a-4935-17337148aa72 has started
+Log file is located at: /Users/mustapha/.azcopy/f20cd071-6abd-0b4a-4935-17337148aa72.log
+
+100.0 %, 4 Done, 0 Failed, 0 Pending, 4 Total, 2-sec Throughput (Mb/s): 12.1501
+
+Job f20cd071-6abd-0b4a-4935-17337148aa72 Summary
+Files Scanned at Source: 4
+Files Scanned at Destination: 4
+Elapsed Time (Minutes): 0.0334
+Number of Copy Transfers for Files: 4
+Number of Copy Transfers for Folder Properties: 0 
+Total Number Of Copy Transfers: 4
+Number of Copy Transfers Completed: 4
+Number of Copy Transfers Failed: 0
+Number of Deletions at Destination: 0
+Total Number of Bytes Transferred: 3049974
+Total Number of Bytes Enumerated: 3049974
+Final Job Status: Completed
+
