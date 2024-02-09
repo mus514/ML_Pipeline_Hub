@@ -53,7 +53,7 @@ def daily_process():
                 load_files_list.append(stock)
                 print(f"JSON data saved to {file_path}")
         
-        text_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/output.txt'
+        text_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/logs/output.txt'
         with open(text_path, 'w') as file:
             file.write(f'{len(load_files_list)}' + '\n')
             # Write the intro string

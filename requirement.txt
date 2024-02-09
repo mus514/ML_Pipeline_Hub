@@ -5,7 +5,7 @@ container_name="https://mymlprojects.blob.core.windows.net/raw/"
 
 
 # the path for the daily output text file
-file_path="output.txt"
+file_path="logs/output.txt"
 
 # Read the first line of the file
 first_line=$(head -n 1 "$file_path")
