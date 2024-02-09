@@ -1,6 +1,0 @@
-4
-The loaded stock files for 2024-02-07 are :
------ AAPL
------ MSFT
------ AMZN
------ GOOGL

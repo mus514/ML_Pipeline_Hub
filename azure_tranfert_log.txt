@@ -1,66 +1,0 @@
-Executing the output because it contains a 4 in the first line.
-INFO: Any empty folders will not be processed, because source and/or destination doesn't have full folder support
-
-Job f20cd071-6abd-0b4a-4935-17337148aa72 has started
-Log file is located at: /Users/mustapha/.azcopy/f20cd071-6abd-0b4a-4935-17337148aa72.log
-
-100.0 %, 4 Done, 0 Failed, 0 Pending, 4 Total, 2-sec Throughput (Mb/s): 12.1501
-
-Job f20cd071-6abd-0b4a-4935-17337148aa72 Summary
-Files Scanned at Source: 4
-Files Scanned at Destination: 4
-Elapsed Time (Minutes): 0.0334
-Number of Copy Transfers for Files: 4
-Number of Copy Transfers for Folder Properties: 0 
-Total Number Of Copy Transfers: 4
-Number of Copy Transfers Completed: 4
-Number of Copy Transfers Failed: 0
-Number of Deletions at Destination: 0
-Total Number of Bytes Transferred: 3049974
-Total Number of Bytes Enumerated: 3049974
-Final Job Status: Completed
-
-Executing the output because it contains a 4 in the first line.
-INFO: Any empty folders will not be processed, because source and/or destination doesn't have full folder support
-
-Job fdbae56a-44e8-2042-7d05-ce019c144644 has started
-Log file is located at: /Users/mustapha/.azcopy/fdbae56a-44e8-2042-7d05-ce019c144644.log
-
-0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 00.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 3.14260.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 2.48760.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 1.964 0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 1.57240.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 1.562721.4 %, 1 Done, 0 Failed, 3 Pending, 4 Total, 2-sec Throughput (Mb/s): 1.143721.4 %, 1 Done, 0 Failed, 3 Pending, 4 Total, 2-sec Throughput (Mb/s): 0.321573.7 %, 3 Done, 0 Failed, 1 Pending, 4 Total, 2-sec Throughput (Mb/s): 0     100.0 %, 4 Done, 0 Failed, 0 Pending, 4 Total, 2-sec Throughput (Mb/s): 0
-
-Job fdbae56a-44e8-2042-7d05-ce019c144644 Summary
-Files Scanned at Source: 4
-Files Scanned at Destination: 4
-Elapsed Time (Minutes): 0.3337
-Number of Copy Transfers for Files: 4
-Number of Copy Transfers for Folder Properties: 0 
-Total Number Of Copy Transfers: 4
-Number of Copy Transfers Completed: 4
-Number of Copy Transfers Failed: 0
-Number of Deletions at Destination: 0
-Total Number of Bytes Transferred: 3051038
-Total Number of Bytes Enumerated: 3051038
-Final Job Status: Completed
-
-Executing the output because it contains a 4 in the first line.
-INFO: Any empty folders will not be processed, because source and/or destination doesn't have full folder support
-
-Job b1b06db2-6312-4b42-5e6a-f1e87527b197 has started
-Log file is located at: /Users/mustapha/.azcopy/b1b06db2-6312-4b42-5e6a-f1e87527b197.log
-
-0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 3.26190.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 1.832 0.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 2.48940.0 %, 0 Done, 0 Failed, 4 Pending, 4 Total, 2-sec Throughput (Mb/s): 2.096221.4 %, 1 Done, 0 Failed, 3 Pending, 4 Total, 2-sec Throughput (Mb/s): 1.825673.7 %, 3 Done, 0 Failed, 1 Pending, 4 Total, 2-sec Throughput (Mb/s): 0.6804100.0 %, 4 Done, 0 Failed, 0 Pending, 4 Total, 2-sec Throughput (Mb/s): 0    
-
-Job b1b06db2-6312-4b42-5e6a-f1e87527b197 Summary
-Files Scanned at Source: 4
-Files Scanned at Destination: 4
-Elapsed Time (Minutes): 0.2336
-Number of Copy Transfers for Files: 4
-Number of Copy Transfers for Folder Properties: 0 
-Total Number Of Copy Transfers: 4
-Number of Copy Transfers Completed: 4
-Number of Copy Transfers Failed: 0
-Number of Deletions at Destination: 0
-Total Number of Bytes Transferred: 3051570
-Total Number of Bytes Enumerated: 3051570
-Final Job Status: Completed
-
