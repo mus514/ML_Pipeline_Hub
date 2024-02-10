@@ -2,6 +2,7 @@
 import requests
 import json
 from datetime import datetime
+import yfinance as yf
 
 # Replace 'YOUR_ALPHA_VANTAGE_API_KEY' with your actual API key
 api_key = 'KO4Q75QIO0DULFR5'
@@ -16,42 +17,26 @@ folder_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/data/'
 today = datetime.now().date()
 
 # upload daily stock file
-def load_data(api_key, symbol):
-    endpoint = 'https://www.alphavantage.co/query'
-    function = 'TIME_SERIES_DAILY'
-    datatype = 'json'
-
-    # Build the API request URL
-    url = f'{endpoint}?function={function}&symbol={symbol}&apikey={api_key}&datatype={datatype}&outputsize=full'
-    # Make the API request
+def load_data(stock_symbol):
+    # Start date
+    start_date = '2004-01-01'
     
-    response = requests.get(url)
+    # Use yfinance to download stock data
+    stock_data = yf.download(stock_symbol, start=start_date, end=today)
 
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Parse and filter the data for the specified date range
-        data = response.json()
-        return data
-    
-    #print(filtered_data)
-    else:
-        print(f"Error: {response.status_code}, {response.text}") 
-
+    return stock_data
 
 # Daily process
 def daily_process():
     try:
         load_files_list = []
         for stock in symbol:
-            data = load_data(api_key, stock)
-            file_path = f'{folder_path}{stock}.json'
-
-            if list(data.keys())[0] != 'Information':
-                with open(file_path, 'w') as json_file:
-                    json.dump(data, json_file)
-                
-                load_files_list.append(stock)
-                print(f"JSON data saved to {file_path}")
+            df = load_data(stock)
+            df = df.reset_index()
+            file_path = f'{folder_path}{stock}.csv'
+            df.to_csv(file_path, index=False)               
+            load_files_list.append(stock)
+            print(f"csv file saved to {file_path}")
         
         text_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/logs/output.txt'
         with open(text_path, 'w') as file:
@@ -66,6 +51,5 @@ def daily_process():
     except Exception as error:
         print(f'An unexpected error occurred: {error}')
    
-
 # daily runing
 daily_process()
