@@ -1,0 +1,14 @@
+#!/bin/bash
+
+storage="?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2024-04-01T01:53:24Z&st=2024-02-13T18:53:24Z&spr=https&sig=uuyzcpnt9q%2B%2FZhq%2FA2Vk3A14a7P8hrERo8kk149ocag%3D"
+
+container_name="https://lemusdata.blob.core.windows.net/tables"
+./azcopy sync "$container_name$storage" "data/tables/"   --delete-destination=true --recursive=true 
+
+container_name="https://lemusdata.blob.core.windows.net/prod"
+./azcopy sync "$container_name$storage" "data/prod/"   --delete-destination=true --recursive=true 
+
+container_name="https://lemusdata.blob.core.windows.net/clean"
+./azcopy sync "$container_name$storage" "data/clean/"  --delete-destination=true --recursive=true 
+
+

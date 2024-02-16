@@ -1,6 +1,5 @@
 #!/miniconda3/envs/ml-ai
-import requests
-import json
+
 from datetime import datetime
 import yfinance as yf
 
@@ -11,7 +10,7 @@ api_key = 'KO4Q75QIO0DULFR5'
 symbol = ['AAPL', 'MSFT', 'AMZN', 'GOOGL'] 
 
 # folder to save data
-folder_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/data/'
+folder_path = 'Mon_disque/ML_projects/ML_Pipeline_Hub/data/raw'
 
 # today date
 today = datetime.now().date()
