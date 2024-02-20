@@ -13,7 +13,7 @@ first_line=$(head -n 1 "$file_path")
 # Check if the first line contains the digit "4"
 if [[ "$first_line" == *4* ]]; then
     echo "Executing the output because it contains a 4 in the first line."
-    ./azcopy sync "data"  "$container_name$storage"    --delete-destination=true --recursive=true --exclude-pattern=".DS_Store"
+    ./azcopy sync "data/raw"  "$container_name$storage"    --delete-destination=true --recursive=true --exclude-pattern=".DS_Store"
 
 else
     echo "The first line does not contain a 4. Skipping execution."
