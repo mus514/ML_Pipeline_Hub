@@ -1,36 +1,27 @@
 ---
 title: "Financial Data Intelligence Suite"
-author: "<a href='https://mus514.github.io/portfolio.github.io/' target='_blank'>Mustapha Bouhsen</a>"
-date: "1/1/2024"
-mail: "bouhsen@gmail.com"
-#linkedin: ""
-#twitter: ""
-github: "mus514"
-home: "portfolio.github.io/"
-math: TRUE
-logo: "icon.jpg"
-output:
-  epuRate::epurate:
-    #css: style.css
-    toc: TRUE
-    number_sections: FALSE
+author: "<a href='https://mus514.github.io/portfolio.github.io/' target='_blank'>Mustapha Bouhsen"
+date: "01-01-2024"
+home: "alexander-kahanek.github.io"
+output: 
+  rmdformats::robobook:
+    highlight: kate
     code_folding: "hide"
-    #includes: 
-        #before_body: header.html
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Math
-
-$$
-X_i = \alpha_i y_i
-$$
 
 
+![The pipeline architecture](architecture.gif)
 
-## Plot
+## Welcome
 
-* I'm Handson
+In the dynamic landscape of financial markets, where real-time data and informed decision-making are crucial, the integration of advanced technologies has become imperative. Recognizing the significance of this, I have embarked on a comprehensive project aimed at creating an end-to-end automated pipeline for the collection, processing, and analysis of daily stock data. This project is tailored to cater to the financial performance of key market players, including AAPL, MSFT, GOOGL, and AMZN. The overarching goal is to provide stakeholders with a robust, systematic, and scalable solution that empowers them in making data-driven investment decisions.
+
+
+
+
