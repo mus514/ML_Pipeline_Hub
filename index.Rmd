@@ -1,0 +1,25 @@
+---
+title: "Financial Data Intelligence Suite"
+author: "<a href='https://mus514.github.io/portfolio.github.io/' target='_blank'>Mustapha Bouhsen</a>"
+date: "1/1/2024"
+mail: "bouhsen@gmail.com"
+#linkedin: ""
+#twitter: ""
+github: "mus514"
+home: "portfolio.github.io/"
+logo: "icon.png"
+output:
+  epuRate::epurate:
+    #css: style.css
+    toc: TRUE
+    number_sections: FALSE
+    code_folding: "hide"
+    #includes: 
+        #before_body: header.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
