@@ -171,3 +171,8 @@ index_files
 
 icon.png
 *.icon.png
+
+
+
+.Rhistory
+*.Rhistory
