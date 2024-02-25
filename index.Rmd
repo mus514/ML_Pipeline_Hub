@@ -7,7 +7,8 @@ mail: "bouhsen@gmail.com"
 #twitter: ""
 github: "mus514"
 home: "portfolio.github.io/"
-logo: "icon.png"
+math: TRUE
+logo: "icon.jpg"
 output:
   epuRate::epurate:
     #css: style.css
@@ -22,4 +23,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Math
 
+$$
+X_i = \alpha_i y_i
+$$
+
+
+
+## Plot
+
+* I'm Handson
