@@ -169,6 +169,17 @@ index_files
 *.index_files
 
 
+blob.png
+*.blob.png
+
+factory.png
+*.factory.png
+
+log.png
+*.log.png
+
+
+
 icon.png
 *.icon.png
 

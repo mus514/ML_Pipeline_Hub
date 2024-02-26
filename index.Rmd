@@ -20,7 +20,82 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Welcome
 
-In the dynamic landscape of financial markets, where real-time data and informed decision-making are crucial, the integration of advanced technologies has become imperative. Recognizing the significance of this, I have embarked on a comprehensive project aimed at creating an end-to-end automated pipeline for the collection, processing, and analysis of daily stock data. This project is tailored to cater to the financial performance of key market players, including AAPL, MSFT, GOOGL, and AMZN. The overarching goal is to provide stakeholders with a robust, systematic, and scalable solution that empowers them in making data-driven investment decisions.
+In the dynamic landscape of financial markets, where real-time data and informed decision-making are crucial, the integration of advanced technologies has become imperative. Recognizing the significance of this, I have embarked on a comprehensive project aimed at creating an end-to-end automated **pipeline** for the collection, processing, and analysis of daily stock data. This project is tailored to cater to the financial performance of key market players, including **AAPL**, **MSFT**, **GOOGL**, and **AMZN**. The overarching goal is to provide stakeholders with a robust, systematic, and scalable solution that empowers them in making data-driven investment decisions.
+
+
+## Data collection
+
+I used a [**Python**](https://github.com/mus514/ML_Pipeline_Hub/blob/main/azure_api_daily_load.py) script to gather information about stocks. This script talks to financial websites using an **API**, which is like a special connection. The **API** assists it in fetching daily data for particular companies. I made sure the script can handle errors to keep the data reliable. Each timethe script is run, it creates a log with details like how much data it got, the date, and the stock name, and saves it in a text file named **output.txt**.
+
+![](log.png){width="400" height="180"}
+
+
+
+## Scheduled Execution via Crontab
+
+
+The [**crontab**](https://crontab.guru) scheduler is a tool used in MacOS to schedule the execution of commands or scripts at specific times. It uses a syntax to define the schedule, allowing users to automate tasks.It plays a pivotal role in automating the execution of the **Python** script. The Python script is scheduled to run at **9 pm**. This timing ensures that the stock data is consistently updated, providing users with the latest market information at the specified time each day.
+
+Upon successful execution of the script, another scheduled task is triggered to verify if all stock are loaded and then transfer the data files from the local machine to the designated **raw** folder in **Azure Blob Storage** using **AZCOPY**. Raw data often refers to unprocessed or minimally processed data that is directly collected from sources. In this context, the **raw** folder acts as the starting point for storing stock data before any further processing or analysis.
+
+![](blob.png){width="700" height="200"}
+
+
+## Azure Data Factory Orchestration
+
+After the successful transfer of data files to the designated "raw" folder in **Azure Blob Storage**, this folder now contains the raw, unprocessed stock data. An event trigger is configured within **Azure Data Factory**, a cloud-based data integration service by Microsoft. This event trigger is set to automatically activate when new files are detected or added to the **raw** folder in **Azure Blob Storage**.
+
+Upon the activation of the event trigger, a workflow is initiated to integrate with **Databricks**, a big data analytics platform. This integration involves the execution of a series of **6 notebooks** within the **Databricks** environment. The 6 notebooks contain specific code and tasks related to the processing, transformation, and analysis of the raw stock data.
+
+The diagram depicts both the pipeline structure and the interdependencies among the scripts within the notebooks.
+
+![](factory.png){width="700" height="250"}
+
+
+## [Databricks Notebooks for Data Processing and Analysis](https://github.com/mus514/ML_Pipeline_Hub/tree/main/Daily-process_Notebooks)
+
+### 5-1 Daily Data Processing ("daily_process_stocks"):
+
+The first notebook, **daily_process_stocks**,  leverages **PySpark** to clean and transform raw data. Processed data is stored in the **clean** folder within **Azure Blob Storage** in **.csv** format, ready for further analysis.
+
+The notebook initiates a process of refining column names within the raw data. This involves addressing potential inconsistencies, such as *whitespace*, *special characters*, or any *irregularities* that may hinder downstream analysis.
+
+To enhance clarity and ease of reference, the notebook standardizes column names, ensuring a **uniform naming** convention across all datasets. This not only improves data consistency but also streamlines subsequent operations, making the data more accessible to automated processes.
+
+A critical aspect of data integrity lies in ensuring that each column's data type corresponds accurately to its content. The notebook incorporates robust **schema** validation procedures to confirm that each column contains the expected data type.
+
+
+**PySpark** is a good tools to process the data, but when its time to save the data, it did gave flexibility in which name we want to give to our file. To address this issue, I developed a [**recursive function (get_files_paths_from_folders)**](https://github.com/mus514/ML_Pipeline_Hub/blob/main/library/daily_utilities.ipynb) that systematically retrieves the paths of all files in the designated folder and its subfolders.
+
+### 5-2 Stocks information and prices ("daily_stocks-prices_sql_tables"):
+
+Another notebook is dedicated to creating individual SQL tables for each stock and a joined SQL table to facilitate comprehensive analysis, including the calculation of stock returns.
+
+### 5-3 Log Returns Calculation:
+A subsequent notebook calculates log returns using Spark, providing a crucial metric for understanding stock performance.
+
+### 5-4 Volatility and Monte Carlo Simulation:
+Further notebooks focus on calculating daily volatility using the GARCH model and conducting Monte Carlo simulations to project stock prices for the next 250 days, adding depth to the analysis.
+
+### 5-5 Data Joining for Visualization:
+The final set of notebooks focuses on joining various tables to create a cohesive dataset for visualization purposes, combining stock information, prices, returns, volatility, and simulated prices.
+
+
+
+## Data Visualization and Utilization in Tableau:
+A scheduled task facilitates the loading of the processed data onto the local machine, making it accessible for visualization in Tableau Public. Tableau becomes the central platform for stakeholders to explore, analyze, and derive insights from the integrated financial data.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
