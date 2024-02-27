@@ -65,24 +65,96 @@ To enhance clarity and ease of reference, the notebook standardizes column names
 A critical aspect of data integrity lies in ensuring that each column's data type corresponds accurately to its content. The notebook incorporates robust **schema** validation procedures to confirm that each column contains the expected data type.
 
 
-**PySpark** is a good tools to process the data, but when its time to save the data, it did gave flexibility in which name we want to give to our file. To address this issue, I developed a [**recursive function (get_files_paths_from_folders)**](https://github.com/mus514/ML_Pipeline_Hub/blob/main/library/daily_utilities.ipynb) that systematically retrieves the paths of all files in the designated folder and its subfolders.
+While **PySpark** is a powerful tool for data processing, it lacks flexibility when it comes to naming saved data files. To tackle this limitation, there is a need to traverse through files in different folders. Unfortunately, the required functionality is not present in **db.utilities**. As a solution, I created a **recursive function** [**(get_files_paths_from_folders)**](https://github.com/mus514/ML_Pipeline_Hub/blob/main/library/daily_utilities.ipynb) designed to systematically retrieve the paths of all files within the specified folder and its subfolders. The purpose of this function is to retrieve all file names from a temporary folder. Subsequently, these files can be saved to the desired folder with specific names as needed.
+
 
 ### 5-2 Stocks information and prices ("daily_stocks-prices_sql_tables"):
 
-Another notebook is dedicated to creating individual SQL tables for each stock and a joined SQL table to facilitate comprehensive analysis, including the calculation of stock returns.
+Another notebook is specifically dedicated to creating individual SQL tables for each stock, and another one is dedicated to a table for storing prices. The individual SQL tables for each stock facilitate easy joining of tables, enabling seamless data visualization in **Tableau** or **Power BI**. The second table is used to calculate stock returns from the prices, consolidating this information for each stock into a single table.
 
 ### 5-3 Log Returns Calculation:
-A subsequent notebook calculates log returns using Spark, providing a crucial metric for understanding stock performance.
+In a subsequent notebook, **log returns** are calculated using Spark, offering a crucial metric for comprehending stock performance.
 
-### 5-4 Volatility and Monte Carlo Simulation:
-Further notebooks focus on calculating daily volatility using the GARCH model and conducting Monte Carlo simulations to project stock prices for the next 250 days, adding depth to the analysis.
+The log return is employed for **stationarity**, addressing the time dependence inherent in stocks. Utilizing log returns helps mitigate this temporal dependence.
 
-### 5-5 Data Joining for Visualization:
+The **log return** is given by: 
+
+$$
+r_t = log(\frac{P_t}{P_{t-1}})
+$$
+
+where $P_t$ is the stock price at time t
+
+```{r echo=FALSE, message=FALSE}
+prices <- read.csv("data/prod/stocks_prices.csv")
+returns <- read.csv("data/prod/returns.csv")
+plot(prices$aapl, type="l", ylab="Price in $", main = "AAPL Price", col="gray")
+plot(returns$aapl*100, type="l", ylab="Return in %", main = "AAPL Return", col="gray")
+```
+
+In a plot of stock prices, you see more pronounced fluctuations, especially if the stock has experienced significant price changes. Log returns, on the other hand, can exhibit a more consistent spread of values, making it easier to identify patterns or trends.
+ 
+### 5-4 GARCH(1,1) Volatility (daily_volatility_sql_tables):
+
+This notebook is dedicated to the computation of daily volatility using the GARCH model and the subsequent creation of a table containing all the computed values. 
+
+The **GARCH** model is motivated by the need to better capture the characteristics of financial time series data, especially the time-varying and autocorrelated nature of volatility. Its application has proven valuable in various financial domains, including risk management, option pricing, and forecasting, making it a widely used tool in quantitative finance.
+
+The **GARCH** model comprises several parameters that need to be estimated from observed data. The Maximum Likelihood Estimation **(MLE)** method is the most commonly used estimation method. The **GARCH** model with a normal distribution, also known as **GARCH(1,1)**, is a specific variant of the GARCH model in which the errors $\epsilon_t$ follow a normal distribution.
+
+$$
+r_t = \sigma_t \times \epsilon_t, \ \ \ \epsilon_t \sim iid \ N(0,1)
+$$
+
+
+$$
+\sigma_t^2 = \omega + \alpha r_{t-1}^2 + \beta \sigma_{t-1}^2
+$$
+
+where $\omega \ge 0$, $\alpha,\beta > 0$ et $\alpha+\beta < 1$
+
+$\sigma_t^2$ represents the conditional volatility at time t.
+
+$r_{t-1}^2$ is the squared return at time t-1.
+
+$\omega$ is the constant term.
+
+$\alpha$ is the coefficient measuring the impact of the previous return on conditional volatility.
+
+$\beta$ is the coefficient measuring the impact of the previous volatility on conditional volatility.
+
+The minimized likelihood function is expressed as:
+
+$$
+L(r|\theta) = f(r_1, ..., r_n|\theta) = f(r_1) \times f(r_2|r_1) \times \dots \times f(r_n|r_{n-1}...r_1)
+$$
+
+$$
+l(r|\theta) = log(L(r|\theta)) = log(f(r_1, ..., r_n|\theta) = f(r_1) \times f(r_2|r_1) \times \dots \times f(r_n|r_{n-1}...r_1))
+$$
+
+$$
+l(r|\theta) = \sum_{i=1}^n log(f(r_i|\sigma_i^2)) = \sum_{i=1}^nlog(\frac{1}{\sqrt(2\pi\sigma_i^2)} e^{-\frac{1}{2}(\frac{r_i}{\sigma_i})^2})
+$$
+
+In the context of optimization, maximizing $L(r|\theta)$ is equivalent to minimizing $-l(r|\theta)$.
+
+After estimating the parameters, the volatility is given by :
+
+$$
+ \hat{\sigma}_{t}^2 = \hat{\omega} + \hat{\alpha} r_{t-1}^2 + \hat{\beta} \hat{\sigma}_{t-1}^2
+$$
+
+For a detailed examination of the function I employed to determine the optimal parameters, please refer to this [code](https://github.com/mus514/ML_Pipeline_Hub/blob/main/library/garch_model.ipynb).
+
+### 5-5 Monte-Carlo simulation (daily_monte-carlo_simulation_sql_tables)
+
 The final set of notebooks focuses on joining various tables to create a cohesive dataset for visualization purposes, combining stock information, prices, returns, volatility, and simulated prices.
 
 
 
 ## Data Visualization and Utilization in Tableau:
+
 A scheduled task facilitates the loading of the processed data onto the local machine, making it accessible for visualization in Tableau Public. Tableau becomes the central platform for stakeholders to explore, analyze, and derive insights from the integrated financial data.
 
 
