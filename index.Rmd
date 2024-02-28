@@ -147,13 +147,49 @@ $$
 
 For a detailed examination of the function I employed to determine the optimal parameters, please refer to this [code](https://github.com/mus514/ML_Pipeline_Hub/blob/main/library/garch_model.ipynb).
 
+
+```{r echo=FALSE, message=FALSE}
+vol <- read.csv("data/prod/volatilities.csv")
+plot(vol$aapl*100, type="l", ylab="Volatility in %", main = "AAPL Garch volatility", col="gray")
+```
+
 ### 5-5 Monte-Carlo simulation (daily_monte-carlo_simulation_sql_tables)
 
-The final set of notebooks focuses on joining various tables to create a cohesive dataset for visualization purposes, combining stock information, prices, returns, volatility, and simulated prices.
+This notebook is dedicated to conducting `n` simulations for the future `m` days for each stock price. In this instance, I have opted for `1000` simulations over the next `250` days. 
+
+The simulation is carried out in several steps: 
+
+  * The initial step involves fitting the GARCH model to determine the optimal parameters. $\omega, \alpha, \beta$
+  * Generate **250** simulations from a Normal distribution $\epsilon_t \sim N(0,1)$.
+  * The return of at time `t` is given by : $r_t=\epsilon_t\sigma_t$
+  * From $r_t$ and $\sigma_t$ we can calculate $\sigma_{t+1}$
+  * Each simulated value will contribute to calculating both the volatility and the return for the subsequent day.
+
+
+![Simulations steps](schema.png)
+
+After getting the simulated returns, we can calculate the stock price for the next `250` days starting from the last observed price, denoted as $S_0$.
+
+The price at time `t` is given by :
+
+$$
+S_t = S_0e^{\sum_{i=1}^tr_i}
+$$
+Lastly, repeat this process 1000 times.
+
+After simulation we got this result
+
+```{r echo=FALSE, message=FALSE}
+sim <- read.csv("data/prod/aapl_simulation.csv")
+matplot(sim[, 6], type = "l", ylab = "Price")
+```
 
 
 
 ## Data Visualization and Utilization in Tableau:
+
+This notebook focuses on joining various tables to create a cohesive dataset for visualization purposes, combining stock information, prices, returns, volatility, and simulated prices.
+
 
 A scheduled task facilitates the loading of the processed data onto the local machine, making it accessible for visualization in Tableau Public. Tableau becomes the central platform for stakeholders to explore, analyze, and derive insights from the integrated financial data.
 

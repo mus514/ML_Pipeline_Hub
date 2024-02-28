@@ -183,6 +183,8 @@ log.png
 icon.png
 *.icon.png
 
+schema.png
+*.schema.png
 
 
 .Rhistory
