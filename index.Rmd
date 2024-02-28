@@ -179,10 +179,36 @@ Lastly, repeat this process 1000 times.
 
 After simulation we got this result
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 sim <- read.csv("data/prod/aapl_simulation.csv")
-matplot(sim[, 6], type = "l", ylab = "Price")
+matplot(sim, type = "l", ylab = "Price", main="AAPL simulation")
 ```
+
+By analyzing the simulation, we can examine the price distribution for each, enabling the calculation of various risk measures such as **VaR** and **CVaR**. Both **VaR** and **CVaR** are essential tools for quantifying and measuring the potential downside risk of a portfolio or investment.
+
+VaR and CVaR are given by :
+
+$$
+VaR_{5\%} = F^{-1}_X(0.05)
+\\
+CVaR_{5\%} = \mathbb{E}[X|X\leq VaR_{5\%}]
+$$
+
+
+For example lets analyse the in `250` days
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+x <- as.numeric(sim[252,1:1000])
+hist(x, breaks = 100, main = "Distribution of the last prices of AAPL", xlab = "price")
+VaR <- quantile(x, 0.05)
+CVaR <- mean(x[x <= VaR])
+
+abline(v = VaR, col = "red", lty = 2)
+abline(v = CVaR, col = "blue", lty = 2)
+legend("topright", legend = c(paste0("VaR=", round(VaR, 2)), paste0("CVaR=", round(CVaR, 2))), col = c("red", "blue"), lty = 2)
+
+```
+
 
 
 
