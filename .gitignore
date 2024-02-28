@@ -186,6 +186,11 @@ icon.png
 schema.png
 *.schema.png
 
+table.png
+*.table.png
+
+original_returns.png
+*.original_returns.png
 
 .Rhistory
 *.Rhistory

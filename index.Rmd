@@ -6,7 +6,7 @@ home: "alexander-kahanek.github.io"
 output: 
   rmdformats::robobook:
     highlight: kate
-    code_folding: "hide"
+    #code_folding: "hide"
 ---
 
 
@@ -25,7 +25,7 @@ In the dynamic landscape of financial markets, where real-time data and informed
 
 ## Data collection
 
-I used a [**Python**](https://github.com/mus514/ML_Pipeline_Hub/blob/main/azure_api_daily_load.py) script to gather information about stocks. This script talks to financial websites using an **API**, which is like a special connection. The **API** assists it in fetching daily data for particular companies. I made sure the script can handle errors to keep the data reliable. Each timethe script is run, it creates a log with details like how much data it got, the date, and the stock name, and saves it in a text file named **output.txt**.
+I used a [**Python**](https://github.com/mus514/ML_Pipeline_Hub/blob/main/azure_api_daily_load.py) script to gather information about stocks. This script talks to financial websites using an **API**, which is like a special connection. The **API** assists it in fetching daily data for particular companies. I made sure the script can handle errors to keep the data reliable. Whenever the script is executed, it generates a log containing information such as the acquired data amount, date, and stocks name. This log is then stored in a text file named **output.txt**.
 
 ![](log.png){width="400" height="180"}
 
@@ -34,9 +34,9 @@ I used a [**Python**](https://github.com/mus514/ML_Pipeline_Hub/blob/main/azure_
 ## Scheduled Execution via Crontab
 
 
-The [**crontab**](https://crontab.guru) scheduler is a tool used in MacOS to schedule the execution of commands or scripts at specific times. It uses a syntax to define the schedule, allowing users to automate tasks.It plays a pivotal role in automating the execution of the **Python** script. The Python script is scheduled to run at **9 pm**. This timing ensures that the stock data is consistently updated, providing users with the latest market information at the specified time each day.
+The [**crontab**](https://crontab.guru) scheduler is a tool used in MacOS to schedule the execution of commands or scripts at specific times. It uses a syntax to define the schedule, allowing users to automate tasks. It plays a pivotal role in automating the execution of the **Python** script. The Python script is scheduled to run at **9 pm**. This timing ensures that the stock data is consistently updated, providing users with the latest market information at the specified time each day.
 
-Upon successful execution of the script, another scheduled task is triggered to verify if all stock are loaded and then transfer the data files from the local machine to the designated **raw** folder in **Azure Blob Storage** using **AZCOPY**. Raw data often refers to unprocessed or minimally processed data that is directly collected from sources. In this context, the **raw** folder acts as the starting point for storing stock data before any further processing or analysis.
+Upon successful execution of the script, another scheduled task is triggered to verify if all stock are loaded and then transfer the data files from my **local machine** to the designated **raw** folder in **Azure Blob Storage** using **AZCOPY**. Raw data often refers to unprocessed or minimally processed data that is directly collected from sources. In this context, the **raw** folder acts as the starting point for storing stock data before any further processing or analysis.
 
 ![](blob.png){width="700" height="200"}
 
@@ -54,7 +54,7 @@ The diagram depicts both the pipeline structure and the interdependencies among 
 
 ## [Databricks Notebooks for Data Processing and Analysis](https://github.com/mus514/ML_Pipeline_Hub/tree/main/Daily-process_Notebooks)
 
-### 5-1 Daily Data Processing ("daily_process_stocks"):
+### Daily Data Processing ("daily_process_stocks"):
 
 The first notebook, **daily_process_stocks**,  leverages **PySpark** to clean and transform raw data. Processed data is stored in the **clean** folder within **Azure Blob Storage** in **.csv** format, ready for further analysis.
 
@@ -68,11 +68,11 @@ A critical aspect of data integrity lies in ensuring that each column's data typ
 While **PySpark** is a powerful tool for data processing, it lacks flexibility when it comes to naming saved data files. To tackle this limitation, there is a need to traverse through files in different folders. Unfortunately, the required functionality is not present in **db.utilities**. As a solution, I created a **recursive function** [**(get_files_paths_from_folders)**](https://github.com/mus514/ML_Pipeline_Hub/blob/main/library/daily_utilities.ipynb) designed to systematically retrieve the paths of all files within the specified folder and its subfolders. The purpose of this function is to retrieve all file names from a temporary folder. Subsequently, these files can be saved to the desired folder with specific names as needed.
 
 
-### 5-2 Stocks information and prices ("daily_stocks-prices_sql_tables"):
+### Stocks information and prices ("daily_stocks-prices_sql_tables"):
 
 Another notebook is specifically dedicated to creating individual SQL tables for each stock, and another one is dedicated to a table for storing prices. The individual SQL tables for each stock facilitate easy joining of tables, enabling seamless data visualization in **Tableau** or **Power BI**. The second table is used to calculate stock returns from the prices, consolidating this information for each stock into a single table.
 
-### 5-3 Log Returns Calculation:
+### Log Returns Calculation:
 In a subsequent notebook, **log returns** are calculated using Spark, offering a crucial metric for comprehending stock performance.
 
 The log return is employed for **stationarity**, addressing the time dependence inherent in stocks. Utilizing log returns helps mitigate this temporal dependence.
@@ -94,7 +94,7 @@ plot(returns$aapl*100, type="l", ylab="Return in %", main = "AAPL Return", col="
 
 In a plot of stock prices, you see more pronounced fluctuations, especially if the stock has experienced significant price changes. Log returns, on the other hand, can exhibit a more consistent spread of values, making it easier to identify patterns or trends.
  
-### 5-4 GARCH(1,1) Volatility (daily_volatility_sql_tables):
+### GARCH(1,1) Volatility (daily_volatility_sql_tables):
 
 This notebook is dedicated to the computation of daily volatility using the GARCH model and the subsequent creation of a table containing all the computed values. 
 
@@ -153,7 +153,7 @@ vol <- read.csv("data/prod/volatilities.csv")
 plot(vol$aapl*100, type="l", ylab="Volatility in %", main = "AAPL Garch volatility", col="gray")
 ```
 
-### 5-5 Monte-Carlo simulation (daily_monte-carlo_simulation_sql_tables)
+### Monte-Carlo simulation (daily_monte-carlo_simulation_sql_tables)
 
 This notebook is dedicated to conducting `n` simulations for the future `m` days for each stock price. In this instance, I have opted for `1000` simulations over the next `250` days. 
 
@@ -195,7 +195,7 @@ CVaR_{5\%} = \mathbb{E}[X|X\leq VaR_{5\%}]
 $$
 
 
-For example lets analyse the in `250` days
+This illustrates the price distribution over a period of `250` days.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 x <- as.numeric(sim[252,1:1000])
@@ -209,28 +209,48 @@ legend("topright", legend = c(paste0("VaR=", round(VaR, 2)), paste0("CVaR=", rou
 
 ```
 
+### Monte-Carlo simulation (daily_monte-carlo_simulation_sql_tables)
 
+This notebook aims to combine different tables to create a comprehensive dataset for visualization. It includes stock information, prices, returns, volatility, and simulated prices, with a designated "stock" column indicating the respective stock tag.
 
+here is an example of the joined returns table:
 
-## Data Visualization and Utilization in Tableau:
+![The original returns table](original_returns.png)
 
-This notebook focuses on joining various tables to create a cohesive dataset for visualization purposes, combining stock information, prices, returns, volatility, and simulated prices.
+![The join returns table](table.png)
 
+An illustrative SQL code example is provided for table joining in the [notebook](https://github.com/mus514/ML_Pipeline_Hub/blob/main/Daily-process_Notebooks/sql_join_tables.ipynb).
 
-A scheduled task facilitates the loading of the processed data onto the local machine, making it accessible for visualization in Tableau Public. Tableau becomes the central platform for stakeholders to explore, analyze, and derive insights from the integrated financial data.
+```{eval=FALSE, class='sql'}
+/***************************************
+*
+* Creating join table for returns
+* 
+****************************************/
+DROP TABLE IF EXISTS returns;
 
+CREATE TABLE returns AS
 
+SELECT 
+    date,
+    return,
+    stock
+FROM (
+    SELECT 
+        date,
+        aapl,
+        amzn,
+        googl,
+        msft
+    FROM stocks_returns
+) AS Source
+UNPIVOT (
+    Return FOR stock IN (aapl, amzn, googl, msft)
+) AS UnpivotedTable;
+```
 
+## [Data Visualization and Utilization in Tableau](https://public.tableau.com/app/profile/mustapha.bouhsen/viz/Stockprice_17081222957660/Dashboard1):
 
+To address the limitation of not having **Power BI** for free Azure accounts and using directly SQL tables on it, I implemented a solution. I created a process that automatically downloads the table from Azure to my local machine at scheduled intervals using **crontab**. Subsequently, I leverage these locally stored tables in **Tableau Public** to create visualizations.
 
-
-
-
-
-
-
-
-
-
-
-
+I have developed a **dynamic dashboard** for visualizing the data, integrating live updates sourced from automatically downloaded tables. You can access to this **dashboard** by clicking [here](https://public.tableau.com/app/profile/mustapha.bouhsen/viz/Stockprice_17081222957660/Dashboard1) and select mode **full screen**.
